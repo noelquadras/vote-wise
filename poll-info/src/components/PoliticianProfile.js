@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import '../Prof.css';
 
 const PoliticianProfile = () => {
   const { id } = useParams();
@@ -49,7 +50,7 @@ const PoliticianProfile = () => {
         const response = await axios.get('https://newsapi.org/v2/everything', {
           params: { 
             q: politicianName,
-            apiKey: '9ad3ec66c403467a9e208038743820e7', // Replace with your actual API key
+            apiKey: '9ad3ec66c403467a9e208038743820e7',
             pageSize: 10,
             sortBy: 'relevancy',
           }
@@ -81,15 +82,19 @@ const PoliticianProfile = () => {
   };
 
   return (
-    <div>
+    <div className='prof-container'>
+      <div className='poll-name'>
       <h1>{politician.name}</h1>
-      <div dangerouslySetInnerHTML={{ __html: politician.bio }} />
+      </div>
+      <div className='biography' dangerouslySetInnerHTML={{ __html: politician.bio }} />
 
-      <h2>News</h2>
-      <ul>
+      <h2 className='news-name'>News</h2>
+      <ul className='news-text'>
         {news.map(article => (
           <li key={article.url}>
-            <h3>{article.title}</h3>
+            <a href={article.url} target="_blank" rel="noopener noreferrer">
+              <h3>{article.title}</h3>
+            </a>
             <p>Votes: {article.votes || 0}</p>
             <button onClick={() => handleUpvote(article.url)}>Upvote</button>
             <button onClick={() => handleDownvote(article.url)}>Downvote</button>

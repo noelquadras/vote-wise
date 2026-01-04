@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../List.css';
 
 const PoliticianList = () => {
   const politicians = [
@@ -11,17 +12,21 @@ const PoliticianList = () => {
   ];
 
   return (
-    <div>
-      <h1>Politicians</h1>
-      <ul>
-        {politicians.map(politician => (
-          <li key={politician.id}>
-            <Link to={`/politician/${politician.id}`}>
-              {politician.name}
-            </Link>
-          </li>
-        ))}
-      </ul>
+    <div className='list-container'>
+      <div className='poll-font'>
+        <h1>Politicians</h1>
+      </div>
+      <div className='list-font'>
+        <ul>
+          {politicians.map(politician => (
+            <li key={politician.id}>
+              <Link to={`/politician/${politician.id}`}>
+                {politician.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
